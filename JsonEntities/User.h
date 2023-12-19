@@ -4,8 +4,10 @@
 
 #ifndef BITXDR_USER_H
 #define BITXDR_USER_H
+
 #include<string>
 #include "../json.hpp"
+
 using json = nlohmann::json;
 using namespace std;
 

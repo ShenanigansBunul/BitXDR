@@ -20,13 +20,13 @@ void to_json(ordered_json &j, const Transition &transition) {
 void to_json(ordered_json &j, const Output &output) {
     j = {
             {"summary",
-                     {{"pcs", ordered_json(output.getPcs())},
-                             {"users", ordered_json(output.getUsers())},
-                             {"alerts", ordered_json(output.getAlerts())},
-                             {"transitions", ordered_json(output.getTransitions())}
-                     }
+                       {{"m_pcs", ordered_json(output.getPcs())},
+                               {"m_users", ordered_json(output.getUsers())},
+                               {"m_alerts", ordered_json(output.getAlerts())},
+                               {"m_transitions", ordered_json(output.getTransitions())}
+                       }
             },
-            {"path", ordered_json(output.getPath())}
+            {"m_path", ordered_json(output.getPath())}
     };
 }
 
@@ -34,23 +34,27 @@ int main(int argc, char **argv) {
     if (argc != 3) {
         cout << "usage: xdr.exe input.json output.json";
     } else {
-        string input_file_path = string(argv[1]);
-        ifstream input_file(input_file_path);
-        if (!input_file) {
+        string inputFilePath = string(argv[1]);
+        ifstream inputFile(inputFilePath);
+        if (!inputFile) {
             cout << "input file does not exist";
         } else {
-            if (input_file.is_open()) {
+            if (inputFile.is_open()) {
                 string line;
-                string input_string;
-                while (getline(input_file, line)) {
-                    input_string += line;
+                string inputString;
+                while (getline(inputFile, line)) {
+                    inputString += line;
                 }
-                json input_json{json::parse(input_string)};
-                InputItems input_obj = InputItems(input_json[0]);
+                json inputJson{json::parse(inputString)};
+                InputItems inputObj = InputItems(inputJson[0]);
                 cout << "created input object\n";
-                Output o = Output(input_obj);
+                Output o = Output(inputObj);
                 ordered_json q(o);
                 cout << q.dump(4, ' ');
+                //todo: write to file
+                //todo: handle errors
+                //todo: test local paths as well as global paths
+                //todo: ask if graph is directed (currently it creates new edges that aren't in transitions, should it?)
             }
         }
     }

@@ -29,5 +29,16 @@ int Transition::getAlertScore() const {
 
 bool Transition::operator==(const Transition &other) const {
     return (this->first_entity == other.first_entity && this->second_entity == other.second_entity) ||
-            (this->first_entity == other.second_entity && this->second_entity == other.first_entity);
+           (this->first_entity == other.second_entity && this->second_entity == other.first_entity);
+}
+
+/**
+ * Create a copy of the Transition object with the first_entity and second_entity member values reversed.
+ * @return The copy of the object.
+ */
+Transition Transition::reverseEntities() {
+    Transition copy(*this);
+    copy.first_entity = second_entity;
+    copy.second_entity = first_entity;
+    return copy;
 }

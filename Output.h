@@ -4,6 +4,7 @@
 
 #ifndef BITXDR_OUTPUT_H
 #define BITXDR_OUTPUT_H
+
 #include<vector>
 #include "JsonEntities/PC.h"
 #include "JsonEntities/User.h"
@@ -28,29 +29,34 @@ public:
     [[nodiscard]] const vector<Transition> &getPath() const;
 
 private:
-    long long incidentTimestamp{};
+    long long m_incidentTimestamp{};
 
-    vector<long> allEntities;
-    vector<long> affectedEntities;
-    vector<Alert> alertsInRange;
+    vector<long> m_allEntities;
+    vector<long> m_affectedEntities;
+    vector<Alert> m_alertsInRange;
 
-    vector<long> pcs;
-    vector<long> users;
-    vector<long> alerts;
-    vector<Transition> transitions;
-    vector<Transition> path;
+    vector<long> m_pcs;
+    vector<long> m_users;
+    vector<long> m_alerts;
+    vector<Transition> m_transitions;
+    vector<Transition> m_path;
 
-    void get_all_entities(const vector<PC>& input_pcs, const vector<User>& input_users);
-    void compute_summary(long alertThatGeneratedIncident,
-                         const vector<Alert>& input_alerts);
-    void compute_path(tuple<long,long> entitiesForHighestScorePath,
-                      const vector<Alert>& input_alerts);
-    vector<long> get_entities_from_alert(const Alert& alert, long previous_entity = -1);
-    vector<tuple<Alert,int>> get_alerts_from_entity(long entity_id);
-    void map_affected_entities(const vector<PC>& pcs,
-                               const vector<User>& users);
+    void getAllEntities(const vector<PC> &inputPcs, const vector<User> &inputUsers);
+
+    void computeSummary(long alertThatGeneratedIncident,
+                        const vector<Alert> &inputAlerts);
+
+    void computePath(tuple<long, long> entitiesForHighestScorePath);
+
+    vector<long> getEntitiesFromAlert(const Alert &alert, long previousEntity = -1);
+
+    vector<tuple<Alert, int>> getAlertsFromEntity(long entity_id);
+
+    void mapAffectedEntities(const vector<PC> &inputPcs,
+                             const vector<User> &inputUsers);
+
 public:
-    explicit Output(const InputItems& input);
+    explicit Output(const InputItems &input);
 };
 
 

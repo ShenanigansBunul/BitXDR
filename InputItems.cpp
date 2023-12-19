@@ -4,20 +4,22 @@
 
 #include "InputItems.h"
 #include "json.hpp"
+
 using json = nlohmann::json;
 
-InputItems::InputItems(const json& json) {
-    for(const auto & i : json["pcs"]){
+InputItems::InputItems(const json &json) {
+    for (const auto &i: json["m_pcs"]) {
         pcs.emplace_back(i);
     }
-    for(const auto & i : json["users"]){
+    for (const auto &i: json["m_users"]) {
         users.emplace_back(i);
     }
-    for(const auto & i : json["alerts"]){
+    for (const auto &i: json["m_alerts"]) {
         alerts.emplace_back(i);
     }
     alert_that_generated_incident = json["alert_that_generated_incident"];
-    entities_for_highest_score_path = tuple<long, long>(json["entities_for_highest_score_path"][0], json["entities_for_highest_score_path"][1]);
+    entities_for_highest_score_path = tuple<long, long>(json["entities_for_highest_score_path"][0],
+                                                        json["entities_for_highest_score_path"][1]);
 }
 
 const vector<PC> &InputItems::getPcs() const {
@@ -36,7 +38,7 @@ long InputItems::getAlertThatGeneratedIncident() const {
     return alert_that_generated_incident;
 }
 
-const tuple<long, long> & InputItems::getEntitiesForHighestScorePath() const {
+const tuple<long, long> &InputItems::getEntitiesForHighestScorePath() const {
     return entities_for_highest_score_path;
 }
 

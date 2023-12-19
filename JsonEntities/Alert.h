@@ -4,9 +4,11 @@
 
 #ifndef BITXDR_ALERT_H
 #define BITXDR_ALERT_H
+
 #include<string>
 #include<vector>
 #include "../json.hpp"
+
 using json = nlohmann::json;
 using namespace std;
 

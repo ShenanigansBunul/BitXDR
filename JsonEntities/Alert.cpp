@@ -10,7 +10,7 @@ Alert::Alert(const json &json) {
     timestamp = json["timestamp"];
     name = json["name"];
     score = json["score"];
-    for(const auto & i : json["affected_entities"]){
+    for (const auto &i: json["affected_entities"]) {
         affected_entities.push_back(i);
     }
 }

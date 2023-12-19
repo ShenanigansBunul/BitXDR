@@ -17,4 +17,6 @@ add_executable(BitXDR main.cpp
         Output.h
         JsonEntities/Transition.cpp
         JsonEntities/Transition.h
+        PathGraph.cpp
+        PathGraph.h
 )

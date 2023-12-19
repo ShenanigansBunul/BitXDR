@@ -3846,7 +3846,7 @@ struct is_compatible_array_type_impl <
     enable_if_t <
     is_detected<iterator_t, CompatibleArrayType>::value&&
     is_iterator_traits<iterator_traits<detected_t<iterator_t, CompatibleArrayType>>>::value&&
-// special case for types like std::filesystem::path whose iterator's value_type are themselves
+// special case for types like std::filesystem::m_path whose iterator's value_type are themselves
 // c.f. https://github.com/nlohmann/json/pull/3073
     !std::is_same<CompatibleArrayType, detected_t<range_value_t, CompatibleArrayType>>::value >>
 {
@@ -3881,7 +3881,7 @@ struct is_constructible_array_type_impl <
 is_detected<iterator_t, ConstructibleArrayType>::value&&
 is_iterator_traits<iterator_traits<detected_t<iterator_t, ConstructibleArrayType>>>::value&&
 is_detected<range_value_t, ConstructibleArrayType>::value&&
-// special case for types like std::filesystem::path whose iterator's value_type are themselves
+// special case for types like std::filesystem::m_path whose iterator's value_type are themselves
 // c.f. https://github.com/nlohmann/json/pull/3073
 !std::is_same<ConstructibleArrayType, detected_t<range_value_t, ConstructibleArrayType>>::value&&
         is_complete_type <
@@ -24178,7 +24178,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
 
             // collect mandatory members
             const auto op = get_value("op", "op", true).template get<std::string>();
-            const auto path = get_value(op, "path", true).template get<std::string>();
+            const auto path = get_value(op, "m_path", true).template get<std::string>();
             json_pointer ptr(path);
 
             switch (get_op(op))
@@ -24197,7 +24197,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
 
                 case patch_operations::replace:
                 {
-                    // the "path" location must exist - use at()
+                    // the "m_path" location must exist - use at()
                     result.at(ptr) = get_value("replace", "value", false);
                     break;
                 }
@@ -24239,8 +24239,8 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                     bool success = false;
                     JSON_TRY
                     {
-                        // check if "value" matches the one at "path"
-                        // the "path" location must exist - use at()
+                        // check if "value" matches the one at "m_path"
+                        // the "m_path" location must exist - use at()
                         success = (result.at(ptr) == get_value("test", "value", false));
                     }
                     JSON_INTERNAL_CATCH (out_of_range&)
@@ -24297,7 +24297,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
             // different types: replace value
             result.push_back(
             {
-                {"op", "replace"}, {"path", path}, {"value", target}
+                {"op", "replace"}, {"m_path", path}, {"value", target}
             });
             return result;
         }
@@ -24328,7 +24328,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                     result.insert(result.begin() + end_index, object(
                     {
                         {"op", "remove"},
-                        {"path", detail::concat(path, '/', std::to_string(i))}
+                        {"m_path", detail::concat(path, '/', std::to_string(i))}
                     }));
                     ++i;
                 }
@@ -24339,7 +24339,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                     result.push_back(
                     {
                         {"op", "add"},
-                        {"path", detail::concat(path, "/-")},
+                        {"m_path", detail::concat(path, "/-")},
                         {"value", target[i]}
                     });
                     ++i;
@@ -24367,7 +24367,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                         // found a key that is not in o -> remove it
                         result.push_back(object(
                         {
-                            {"op", "remove"}, {"path", path_key}
+                            {"op", "remove"}, {"m_path", path_key}
                         }));
                     }
                 }
@@ -24381,7 +24381,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                         const auto path_key = detail::concat(path, '/', detail::escape(it.key()));
                         result.push_back(
                         {
-                            {"op", "add"}, {"path", path_key},
+                            {"op", "add"}, {"m_path", path_key},
                             {"value", it.value()}
                         });
                     }
@@ -24403,7 +24403,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                 // both primitive type: replace value
                 result.push_back(
                 {
-                    {"op", "replace"}, {"path", path}, {"value", target}
+                    {"op", "replace"}, {"m_path", path}, {"value", target}
                 });
                 break;
             }
