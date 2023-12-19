@@ -1,0 +1,15 @@
+# ninja log v5
+2	3167	7247148037008602	CMakeFiles/BitXDR.dir/main.cpp.obj	4e877529aed04123
+11	2513	7247022904303931	CMakeFiles/BitXDR.dir/Entities/User.cpp.obj	e52e65af76618ba7
+1341	3281	7247153935978556	BitXDR.exe	f3ecf9f490ca75b2
+5	1430	7246397691744471	CMakeFiles/BitXDR.dir/Entities/InputItems.cpp.obj	53ecbde2f7af0979
+4	2514	7247022904303931	CMakeFiles/BitXDR.dir/Entities/PC.cpp.obj	c77f17d03f817f99
+7	2108	7247055562473494	CMakeFiles/BitXDR.dir/Entities/Alert.cpp.obj	c55147346034b543
+2	1845	7247116123955187	CMakeFiles/BitXDR.dir/InputItems.cpp.obj	3dea1b758a43793
+1	62	7247160602934859	build.ninja	28d5c049126586a4
+7	1755	7247038677886661	CMakeFiles/BitXDR.dir/Entities/Transition.cpp.obj	22d4ff7b86c94137
+2	1340	7247153916614376	CMakeFiles/BitXDR.dir/Output.cpp.obj	d377d6ea865a7f6f
+7	1302	7247148018457443	CMakeFiles/BitXDR.dir/JsonEntities/Transition.cpp.obj	9f58100cb505bafc
+1	1838	7247082572872396	CMakeFiles/BitXDR.dir/JsonEntities/PC.cpp.obj	3f73e0c072314ac8
+12	1851	7247082573002611	CMakeFiles/BitXDR.dir/JsonEntities/User.cpp.obj	380b86ff0167e1c7
+6	1779	7247116123289472	CMakeFiles/BitXDR.dir/JsonEntities/Alert.cpp.obj	a0c39c8c3bd977a4

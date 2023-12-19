@@ -1,0 +1,110 @@
+{
+    "pcs": [
+        {
+            "id": 1,
+            "computer_name": "alice-pc",
+            "ip": "10.0.0.1",
+            "mac": "00:00:00:00:00:01"
+        },
+        {
+            "id": 2,
+            "computer_name": "bob-pc",
+            "ip": "10.0.0.2",
+            "mac": "00:00:00:00:00:02"
+        },
+        {
+            "id": 3,
+            "computer_name": "charlie-pc",
+            "ip": "10.0.0.3",
+            "mac": "00:00:00:00:00:03"
+        }
+    ],
+    "users": [
+        {
+            "id": 65537,
+            "email": "david@gmail.com",
+            "nickname": "David"
+        },
+        {
+            "id": 65538,
+            "email": "elon@gmail.com",
+            "nickname": "Elon"
+        }
+    ],
+    "alerts": [
+        {
+            "id": 101,
+            "timestamp": 1699866251001,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                1
+            ]
+        },
+        {
+            "id": 102,
+            "timestamp": 1699866251002,
+            "name": "SuspiciousFileDownloaded",
+            "score": 65,
+            "affected_entities": [
+                1,
+                2
+            ]
+        },
+        {
+            "id": 103,
+            "timestamp": 1699866251003,
+            "name": "SuspiciousURLAccessed",
+            "score": 30,
+            "affected_entities": [
+                2,
+                65537
+            ]
+        },
+        {
+            "id": 104,
+            "timestamp": 1699866251003,
+            "name": "SuspiciousURLAccessed",
+            "score": 30,
+            "affected_entities": [
+                2,
+                65538
+            ]
+        },
+        {
+            "id": 105,
+            "timestamp": 1699866251003,
+            "name": "SuspiciousAdditionalThing",
+            "score": 30,
+            "affected_entities": [
+                65537,
+                3
+            ]
+        },
+        {
+            "id": 106,
+            "timestamp": 1699866251004,
+            "name": "SuspiciousAction",
+            "score": 15,
+            "affected_entities": [
+                3,
+                65538
+            ]
+        },
+        {
+            "id": 107,
+            "timestamp": 1699866251004,
+            "name": "SuspiciousActionn",
+            "score": 1,
+            "affected_entities": [
+                3,
+                1
+            ]
+        }
+    ],
+    "alert_that_generated_incident": 101,
+    "entities_for_highest_score_path": [
+        1,
+        2
+    ]
+}
