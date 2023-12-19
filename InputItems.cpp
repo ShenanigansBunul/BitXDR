@@ -8,13 +8,13 @@
 using json = nlohmann::json;
 
 InputItems::InputItems(const json &json) {
-    for (const auto &i: json["m_pcs"]) {
+    for (const auto &i: json["pcs"]) {
         pcs.emplace_back(i);
     }
-    for (const auto &i: json["m_users"]) {
+    for (const auto &i: json["users"]) {
         users.emplace_back(i);
     }
-    for (const auto &i: json["m_alerts"]) {
+    for (const auto &i: json["alerts"]) {
         alerts.emplace_back(i);
     }
     alert_that_generated_incident = json["alert_that_generated_incident"];

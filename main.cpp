@@ -20,13 +20,13 @@ void to_json(ordered_json &j, const Transition &transition) {
 void to_json(ordered_json &j, const Output &output) {
     j = {
             {"summary",
-                       {{"m_pcs", ordered_json(output.getPcs())},
-                               {"m_users", ordered_json(output.getUsers())},
-                               {"m_alerts", ordered_json(output.getAlerts())},
-                               {"m_transitions", ordered_json(output.getTransitions())}
+                       {{"pcs", ordered_json(output.getPcs())},
+                               {"users", ordered_json(output.getUsers())},
+                               {"alerts", ordered_json(output.getAlerts())},
+                               {"transitions", ordered_json(output.getTransitions())}
                        }
             },
-            {"m_path", ordered_json(output.getPath())}
+            {"path", ordered_json(output.getPath())}
     };
 }
 
@@ -54,7 +54,6 @@ int main(int argc, char **argv) {
                 //todo: write to file
                 //todo: handle errors
                 //todo: test local paths as well as global paths
-                //todo: ask if graph is directed (currently it creates new edges that aren't in transitions, should it?)
             }
         }
     }

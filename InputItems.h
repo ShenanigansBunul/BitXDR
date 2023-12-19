@@ -32,7 +32,7 @@ private:
     vector<User> users;
     vector<Alert> alerts;
     long alert_that_generated_incident;
-    [[maybe_unused]] tuple<long, long> entities_for_highest_score_path;
+    tuple<long, long> entities_for_highest_score_path;
 
 public:
     explicit InputItems(const json &json);
