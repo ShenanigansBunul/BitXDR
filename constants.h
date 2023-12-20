@@ -8,6 +8,8 @@
 namespace constants {
     const long long incidentDeltaTime = 1000 * 60 * 60 * 2; //maximum time from the alert that created the incident (2h)
 
+    const bool print_measured_time = true;
+
     const char message_instructions[] = "Usage: BitXDR.exe input.json output.json";
     const char message_input_file_nonexistent[] = "Error: Input file not found.";
     const char message_input_file_not_open[] = "Error: Cannot open input file.";

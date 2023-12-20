@@ -5,6 +5,7 @@
 #include "InputItems.h"
 #include "Output.h"
 #include <string>
+#include <chrono>
 
 using namespace std;
 using json = nlohmann::json;
@@ -40,36 +41,50 @@ void writeToFile(const string &filePath, const string &content) {
     }
 }
 
+template <typename Func>
+double measureExecutionTime(Func&& func) {
+    auto start = chrono::high_resolution_clock::now();
+    func();
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::duration<double>>(end - start);
+    return duration.count();
+}
+
 int main(int argc, char **argv) {
-    if (argc != 3) {
-        cout << constants::message_instructions;
-    } else {
-        string inputFilePath = string(argv[1]);
-        string outputFilePath = string(argv[2]);
-        ifstream inputFile(inputFilePath);
-        if (inputFile) {
-            if (inputFile.is_open()) {
-                string line;
-                string inputString;
-                while (getline(inputFile, line)) {
-                    inputString += line;
-                }
-                try {
-                    json inputJson{json::parse(inputString)};
-                    InputItems inputObj = InputItems(inputJson[0]);
-                    Output o = Output(inputObj);
-                    ordered_json q(o);
-                    writeToFile(outputFilePath, q.dump(4, ' '));
-                }
-                catch (const json::parse_error &e) {
-                    cout << constants::message_input_parse_error << '\n' << e.what();
+    double elapsedTime = measureExecutionTime([argc, argv] {
+        if (argc != 3) {
+            cout << constants::message_instructions;
+        } else {
+            string inputFilePath = string(argv[1]);
+            string outputFilePath = string(argv[2]);
+            ifstream inputFile(inputFilePath);
+            if (inputFile) {
+                if (inputFile.is_open()) {
+                    string line;
+                    string inputString;
+                    while (getline(inputFile, line)) {
+                        inputString += line;
+                    }
+                    try {
+                        json inputJson{json::parse(inputString)};
+                        InputItems inputObj = InputItems(inputJson[0]);
+                        Output o = Output(inputObj);
+                        ordered_json q(o);
+                        writeToFile(outputFilePath, q.dump(4, ' '));
+                    }
+                    catch (const json::parse_error &e) {
+                        cout << constants::message_input_parse_error << '\n' << e.what();
+                    }
+                } else {
+                    cout << constants::message_input_file_not_open;
                 }
             } else {
-                cout << constants::message_input_file_not_open;
+                cout << constants::message_input_file_nonexistent;
             }
-        } else {
-            cout << constants::message_input_file_nonexistent;
         }
+    });
+    if(constants::print_measured_time) {
+        cout << "Elapsed Time: " << elapsedTime << "s" << std::endl;
     }
     return 0;
 }
