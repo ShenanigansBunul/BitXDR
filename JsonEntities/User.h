@@ -6,22 +6,13 @@
 #define BITXDR_USER_H
 
 #include<string>
-#include "../json.hpp"
 
-using json = nlohmann::json;
 using namespace std;
 
-class User {
+struct User {
     long id;
-public:
-    [[nodiscard]] long getId() const;
-
-private:
     string email;
     string nickname;
-
-public:
-    explicit User(const json &json);
 };
 
 

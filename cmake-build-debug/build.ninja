@@ -51,49 +51,31 @@ build cmake_object_order_depends_target_BitXDR: phony || CMakeFiles/BitXDR.dir
 
 build CMakeFiles/BitXDR.dir/main.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/main.cpp || cmake_object_order_depends_target_BitXDR
   DEP_FILE = CMakeFiles\BitXDR.dir\main.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BitXDR.dir
   OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir
 
 build CMakeFiles/BitXDR.dir/InputItems.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/InputItems.cpp || cmake_object_order_depends_target_BitXDR
   DEP_FILE = CMakeFiles\BitXDR.dir\InputItems.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BitXDR.dir
   OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir
 
-build CMakeFiles/BitXDR.dir/JsonEntities/PC.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/JsonEntities/PC.cpp || cmake_object_order_depends_target_BitXDR
-  DEP_FILE = CMakeFiles\BitXDR.dir\JsonEntities\PC.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BitXDR.dir
-  OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir\JsonEntities
-
-build CMakeFiles/BitXDR.dir/JsonEntities/User.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/JsonEntities/User.cpp || cmake_object_order_depends_target_BitXDR
-  DEP_FILE = CMakeFiles\BitXDR.dir\JsonEntities\User.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BitXDR.dir
-  OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir\JsonEntities
-
-build CMakeFiles/BitXDR.dir/JsonEntities/Alert.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/JsonEntities/Alert.cpp || cmake_object_order_depends_target_BitXDR
-  DEP_FILE = CMakeFiles\BitXDR.dir\JsonEntities\Alert.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BitXDR.dir
-  OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir\JsonEntities
-
 build CMakeFiles/BitXDR.dir/Output.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/Output.cpp || cmake_object_order_depends_target_BitXDR
   DEP_FILE = CMakeFiles\BitXDR.dir\Output.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BitXDR.dir
   OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir
 
 build CMakeFiles/BitXDR.dir/JsonEntities/Transition.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/JsonEntities/Transition.cpp || cmake_object_order_depends_target_BitXDR
   DEP_FILE = CMakeFiles\BitXDR.dir\JsonEntities\Transition.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BitXDR.dir
   OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir\JsonEntities
 
 build CMakeFiles/BitXDR.dir/PathGraph.cpp.obj: CXX_COMPILER__BitXDR_unscanned_Debug C$:/Users/sergi/CLionProjects/BitXDR/PathGraph.cpp || cmake_object_order_depends_target_BitXDR
   DEP_FILE = CMakeFiles\BitXDR.dir\PathGraph.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -static-libstdc++ -static-libgcc -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BitXDR.dir
   OBJECT_FILE_DIR = CMakeFiles\BitXDR.dir
 
@@ -105,8 +87,9 @@ build CMakeFiles/BitXDR.dir/PathGraph.cpp.obj: CXX_COMPILER__BitXDR_unscanned_De
 #############################################
 # Link the executable BitXDR.exe
 
-build BitXDR.exe: CXX_EXECUTABLE_LINKER__BitXDR_Debug CMakeFiles/BitXDR.dir/main.cpp.obj CMakeFiles/BitXDR.dir/InputItems.cpp.obj CMakeFiles/BitXDR.dir/JsonEntities/PC.cpp.obj CMakeFiles/BitXDR.dir/JsonEntities/User.cpp.obj CMakeFiles/BitXDR.dir/JsonEntities/Alert.cpp.obj CMakeFiles/BitXDR.dir/Output.cpp.obj CMakeFiles/BitXDR.dir/JsonEntities/Transition.cpp.obj CMakeFiles/BitXDR.dir/PathGraph.cpp.obj
-  FLAGS = -g
+build BitXDR.exe: CXX_EXECUTABLE_LINKER__BitXDR_Debug CMakeFiles/BitXDR.dir/main.cpp.obj CMakeFiles/BitXDR.dir/InputItems.cpp.obj CMakeFiles/BitXDR.dir/Output.cpp.obj CMakeFiles/BitXDR.dir/JsonEntities/Transition.cpp.obj CMakeFiles/BitXDR.dir/PathGraph.cpp.obj
+  FLAGS = -static-libstdc++ -static-libgcc -g
+  LINK_FLAGS = -static
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\BitXDR.dir
   POST_BUILD = cd .

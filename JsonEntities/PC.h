@@ -6,23 +6,14 @@
 #define BITXDR_PC_H
 
 #include<string>
-#include "../json.hpp"
 
-using json = nlohmann::json;
 using namespace std;
 
-class PC {
-    long id;
-public:
-    [[nodiscard]] long getId() const;
-
-private:
+struct PC {
     string computer_name;
     string ip;
     string mac;
-
-public:
-    explicit PC(const json &json);
+    long id;
 };
 
 

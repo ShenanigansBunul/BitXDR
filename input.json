@@ -17,107 +17,64 @@
             "computer_name": "charlie-pc",
             "ip": "10.0.0.3",
             "mac": "00:00:00:00:00:03"
+        }
+    ],
+    "users": [
+        {
+            "id": 65537,
+            "email": "david@gmail.com",
+            "nickname": "David"
+        },
+        {
+            "id": 65538,
+            "email": "elon@gmail.com",
+            "nickname": "Elon"
+        }
+    ],
+    "alerts": [
+        {
+            "id": 1,
+            "timestamp": 1699866251001,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                1
+            ]
+        },
+        {
+            "id": 2,
+            "timestamp": 1699866251002,
+            "name": "SuspiciousFileDownloaded",
+            "score": 65,
+            "affected_entities": [
+                1,
+                2
+            ]
+        },
+        {
+            "id": 3,
+            "timestamp": 1699866251003,
+            "name": "SuspiciousURLAccessed",
+            "score": 30,
+            "affected_entities": [
+                2,
+                65537
+            ]
         },
         {
             "id": 4,
-            "computer_name": "dave-pc",
-            "ip": "10.0.0.4",
-            "mac": "00:00:00:00:00:04"
-        },
-        {
-            "id": 5,
-            "computer_name": "eve-pc",
-            "ip": "10.0.0.5",
-            "mac": "00:00:00:00:00:05"
-        },
-        {
-            "id": 6,
-            "computer_name": "frank-pc",
-            "ip": "10.0.0.6",
-            "mac": "00:00:00:00:00:06"
-        },
-        {
-            "id": 7,
-            "computer_name": "grace-pc",
-            "ip": "10.0.0.7",
-            "mac": "00:00:00:00:00:07"
-        },
-        {
-            "id": 8,
-            "computer_name": "hank-pc",
-            "ip": "10.0.0.8",
-            "mac": "00:00:00:00:00:08"
-        }
-    ],
-    "users": [],
-    "alerts": [
-        {
-            "id": 101,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 70,
+            "timestamp": 1799866251004,
+            "name": "SuspiciousAction",
+            "score": 15,
             "affected_entities": [
-                1, 2
-            ]
-        },
-        {
-            "id": 102,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 70,
-            "affected_entities": [
-                2, 3
-            ]
-        },
-        {
-            "id": 103,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 70,
-            "affected_entities": [
-                3, 4
-            ]
-        },
-        {
-            "id": 104,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 70,
-            "affected_entities": [
-                4, 5
-            ]
-        },
-        {
-            "id": 105,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 70,
-            "affected_entities": [
-                5, 6
-            ]
-        },
-        {
-            "id": 106,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 70,
-            "affected_entities": [
-                6, 7
-            ]
-        },
-        {
-            "id": 107,
-            "timestamp": 1,
-            "name": "SuspiciousEmailReceived",
-            "score": 7000,
-            "affected_entities": [
-                7, 2
+                3,
+                65538
             ]
         }
     ],
-    "alert_that_generated_incident": 101,
+    "alert_that_generated_incident": 1,
     "entities_for_highest_score_path": [
-        2,
-        5
+        1,
+        65537
     ]
 }

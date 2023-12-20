@@ -1,0 +1,123 @@
+{
+    "pcs": [
+        {
+            "id": 1,
+            "computer_name": "alice-pc",
+            "ip": "10.0.0.1",
+            "mac": "00:00:00:00:00:01"
+        },
+        {
+            "id": 2,
+            "computer_name": "bob-pc",
+            "ip": "10.0.0.2",
+            "mac": "00:00:00:00:00:02"
+        },
+        {
+            "id": 3,
+            "computer_name": "charlie-pc",
+            "ip": "10.0.0.3",
+            "mac": "00:00:00:00:00:03"
+        },
+        {
+            "id": 4,
+            "computer_name": "dave-pc",
+            "ip": "10.0.0.4",
+            "mac": "00:00:00:00:00:04"
+        },
+        {
+            "id": 5,
+            "computer_name": "eve-pc",
+            "ip": "10.0.0.5",
+            "mac": "00:00:00:00:00:05"
+        },
+        {
+            "id": 6,
+            "computer_name": "frank-pc",
+            "ip": "10.0.0.6",
+            "mac": "00:00:00:00:00:06"
+        },
+        {
+            "id": 7,
+            "computer_name": "grace-pc",
+            "ip": "10.0.0.7",
+            "mac": "00:00:00:00:00:07"
+        },
+        {
+            "id": 8,
+            "computer_name": "hank-pc",
+            "ip": "10.0.0.8",
+            "mac": "00:00:00:00:00:08"
+        }
+    ],
+    "users": [],
+    "alerts": [
+        {
+            "id": 101,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                1, 2
+            ]
+        },
+        {
+            "id": 102,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                2, 3
+            ]
+        },
+        {
+            "id": 103,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                3, 4
+            ]
+        },
+        {
+            "id": 104,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                4, 5
+            ]
+        },
+        {
+            "id": 105,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                5, 6
+            ]
+        },
+        {
+            "id": 106,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 70,
+            "affected_entities": [
+                6, 7
+            ]
+        },
+        {
+            "id": 107,
+            "timestamp": 1,
+            "name": "SuspiciousEmailReceived",
+            "score": 7000,
+            "affected_entities": [
+                7, 2
+            ]
+        }
+    ],
+    "alert_that_generated_incident": 101,
+    "entities_for_highest_score_path": [
+        2,
+        5
+    ]
+}

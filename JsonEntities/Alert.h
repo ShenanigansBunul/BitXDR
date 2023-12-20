@@ -7,30 +7,15 @@
 
 #include<string>
 #include<vector>
-#include "../json.hpp"
 
-using json = nlohmann::json;
 using namespace std;
 
-class Alert {
+struct Alert {
     long id;
     long long timestamp;
     string name;
     int score;
     vector<long> affected_entities;
-public:
-    [[nodiscard]] long getId() const;
-
-    [[nodiscard]] long long getTimestamp() const;
-
-    [[nodiscard]] const string &getName() const;
-
-    [[nodiscard]] int getScore() const;
-
-    [[nodiscard]] const vector<long> &getAffectedEntities() const;
-
-public:
-    explicit Alert(const json &json);
 };
 
 

@@ -30,7 +30,7 @@ vector<Transition> PathGraph::computeLongestPath(long source, long target) {
     priorityQueue.push({INT_MAX, source, {}});
 
     while (!priorityQueue.empty()) {
-        int currentNode = get<1>(priorityQueue.top());
+        long currentNode = get<1>(priorityQueue.top());
         int currentWeight = get<0>(priorityQueue.top());
         vector<Transition> currentPath = get<2>(priorityQueue.top());
         priorityQueue.pop();
@@ -49,9 +49,15 @@ vector<Transition> PathGraph::computeLongestPath(long source, long target) {
 
         visited.insert(combinedKey);
 
-        for (const Transition &edge: adjacencyList[currentNode]) {
+        for (Transition edge: adjacencyList[currentNode]) {
             if (!currentPath.empty() && edge.getSecondEntity() == currentPath.back().getFirstEntity()) {
                 continue;
+            }
+
+            // Check if the reverse of the current edge is already present in the path
+            Transition reverseEdge = edge.reverseEntities();
+            if (find(currentPath.begin(), currentPath.end(), reverseEdge) != currentPath.end()) {
+                continue; // Skip traversing the same edge in the opposite direction
             }
 
             int newWeight = min(currentWeight, edge.getAlertScore());

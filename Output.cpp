@@ -19,6 +19,8 @@ Output::Output(const InputItems &input) {
     mapAffectedEntities(input.getPcs(), input.getUsers());
 
     computePath(input.getEntitiesForHighestScorePath());
+
+    sortOutputLists();
 }
 
 /**
@@ -29,10 +31,10 @@ Output::Output(const InputItems &input) {
 void Output::mapAffectedEntities(const vector<PC> &inputPcs, const vector<User> &inputUsers) {
     for (auto &entityIt: m_affectedEntities) {
         if (find_if(inputPcs.begin(), inputPcs.end(),
-                    [&entityIt](const PC &obj) { return obj.getId() == entityIt; }) != inputPcs.end()) {
+                    [&entityIt](const PC &obj) { return obj.id == entityIt; }) != inputPcs.end()) {
             m_pcs.push_back(entityIt);
         } else if (find_if(inputUsers.begin(), inputUsers.end(),
-                           [&entityIt](const User &obj) { return obj.getId() == entityIt; }) != inputUsers.end()) {
+                           [&entityIt](const User &obj) { return obj.id == entityIt; }) != inputUsers.end()) {
             m_users.push_back(entityIt);
         }
     }
@@ -45,10 +47,10 @@ void Output::mapAffectedEntities(const vector<PC> &inputPcs, const vector<User> 
  */
 void Output::getAllEntities(const vector<PC> &inputPcs, const vector<User> &inputUsers) {
     for (auto &it: inputPcs) {
-        m_allEntities.push_back(it.getId());
+        m_allEntities.push_back(it.id);
     }
     for (auto &it: inputUsers) {
-        m_allEntities.push_back(it.getId());
+        m_allEntities.push_back(it.id);
     }
 }
 
@@ -61,14 +63,14 @@ void Output::computeSummary(long alertThatGeneratedIncident,
                             const vector<Alert> &inputAlerts) {
     auto incidentIt = find_if(inputAlerts.begin(), inputAlerts.end(),
                               [&alertThatGeneratedIncident](const Alert &obj) {
-                                  return obj.getId() == alertThatGeneratedIncident;
+                                  return obj.id == alertThatGeneratedIncident;
                               });
     if (incidentIt != inputAlerts.end()) {
         const Alert &incidentAlert = incidentIt[0];
-        m_alerts.push_back(incidentAlert.getId());
-        m_incidentTimestamp = incidentAlert.getTimestamp();
+        m_alerts.push_back(incidentAlert.id);
+        m_incidentTimestamp = incidentAlert.timestamp;
         copy_if(inputAlerts.begin(), inputAlerts.end(), back_inserter(m_alertsInRange), [this](const Alert &obj) {
-            return (abs(obj.getTimestamp() - m_incidentTimestamp) <= incidentDeltaTime);
+            return (abs(obj.timestamp - m_incidentTimestamp) <= constants::incidentDeltaTime);
         });
         vector<long> summaryEntities = getEntitiesFromAlert(incidentAlert);
         vector<tuple<Alert, int>> summaryAlerts{};
@@ -85,7 +87,7 @@ void Output::computeSummary(long alertThatGeneratedIncident,
             }
         }
     } else {
-        cout << "not found alert that generated incident!!";
+        cout << constants::message_incident_not_found_error << '\n';
     }
 }
 
@@ -108,14 +110,13 @@ void Output::computePath(tuple<long, long> entitiesForHighestScorePath) {
  */
 vector<long> Output::getEntitiesFromAlert(const Alert &alert, long previousEntity) {
     vector<long> result{};
-    for (auto &it: alert.getAffectedEntities()) {
+    for (auto &it: alert.affected_entities) {
         if (find(m_affectedEntities.begin(), m_affectedEntities.end(), it) == m_affectedEntities.end()) {
-            cout << it << endl;
             m_affectedEntities.push_back(it);
             result.push_back(it);
         }
         if (previousEntity != -1 && previousEntity != it) {
-            Transition t = Transition(previousEntity, it, alert.getName(), alert.getScore());
+            Transition t = Transition(previousEntity, it, alert.name, alert.score);
             if (find_if(m_transitions.begin(), m_transitions.end(),
                         [&t](const Transition &obj) { return (obj == t); }) ==
                 m_transitions.end()) {
@@ -135,18 +136,26 @@ vector<long> Output::getEntitiesFromAlert(const Alert &alert, long previousEntit
 vector<tuple<Alert, int>> Output::getAlertsFromEntity(const long entity_id) {
     vector<tuple<Alert, int>> result{};
     for (auto &it: m_alertsInRange) {
-        if (abs(it.getTimestamp() - m_incidentTimestamp) <= incidentDeltaTime) {
-            if (find(it.getAffectedEntities().begin(), it.getAffectedEntities().end(), entity_id) !=
-                it.getAffectedEntities().end()) {
-                if (find(m_alerts.begin(), m_alerts.end(), it.getId()) == m_alerts.end()) {
-                    m_alerts.push_back(it.getId());
-
-                    result.emplace_back(it, entity_id);
+        if (abs(it.timestamp - m_incidentTimestamp) <= constants::incidentDeltaTime) {
+            if (find(it.affected_entities.begin(), it.affected_entities.end(), entity_id) !=
+                it.affected_entities.end()) {
+                if (find(m_alerts.begin(), m_alerts.end(), it.id) == m_alerts.end()) {
+                    m_alerts.push_back(it.id);
                 }
+                result.emplace_back(it, entity_id);
             }
         }
     }
     return result;
+}
+
+/**
+ * Sort lists in the output JSON for easier readability.
+ */
+void Output::sortOutputLists() {
+    sort(m_pcs.begin(), m_pcs.end());
+    sort(m_users.begin(), m_users.end());
+    sort(m_alerts.begin(), m_alerts.end());
 }
 
 const vector<long> &Output::getPcs() const {

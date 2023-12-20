@@ -17,17 +17,6 @@ using ordered_json = nlohmann::ordered_json;
 using namespace std;
 
 class Output {
-public:
-    [[nodiscard]] const vector<long> &getPcs() const;
-
-    [[nodiscard]] const vector<long> &getUsers() const;
-
-    [[nodiscard]] const vector<long> &getAlerts() const;
-
-    [[nodiscard]] const vector<Transition> &getTransitions() const;
-
-    [[nodiscard]] const vector<Transition> &getPath() const;
-
 private:
     long long m_incidentTimestamp{};
 
@@ -55,8 +44,20 @@ private:
     void mapAffectedEntities(const vector<PC> &inputPcs,
                              const vector<User> &inputUsers);
 
+    void sortOutputLists();
+
 public:
     explicit Output(const InputItems &input);
+
+    [[nodiscard]] const vector<long> &getPcs() const;
+
+    [[nodiscard]] const vector<long> &getUsers() const;
+
+    [[nodiscard]] const vector<long> &getAlerts() const;
+
+    [[nodiscard]] const vector<Transition> &getTransitions() const;
+
+    [[nodiscard]] const vector<Transition> &getPath() const;
 };
 
 
