@@ -21,13 +21,13 @@ vector<Transition> PathGraph::computeLongestPath(long source, long target) {
         return sumA < sumB;
     };
 
-    priority_queue<tuple<int, long, vector<Transition>>,
-            vector<tuple<int, long, vector<Transition>>>,
-            decltype(comparePaths)> priorityQueue(comparePaths);
+    using PathTuple = tuple<int, long, vector<Transition>>;
+    priority_queue<PathTuple, vector<PathTuple>, decltype(comparePaths)> priorityQueue(comparePaths);
 
     unordered_set<long long> visited;
+    unordered_set<Transition> edgeSet;  // To check if the reverse of the current edge is present in the path
 
-    priorityQueue.push({INT_MAX, source, {}});
+    priorityQueue.push({0, source, {}});
 
     while (!priorityQueue.empty()) {
         long currentNode = get<1>(priorityQueue.top());
@@ -39,9 +39,6 @@ vector<Transition> PathGraph::computeLongestPath(long source, long target) {
             return currentPath;
         }
 
-        // Create unique key based on current node ID and current weight (so as to be able to visit a node multiple
-        // times in separate paths. if the weight is equal there already is a path with the same score or the node
-        // was already visited in this path.
         long long combinedKey = (static_cast<long long>(currentNode) << 32) | currentWeight;
         if (visited.count(combinedKey)) {
             continue;
@@ -49,26 +46,30 @@ vector<Transition> PathGraph::computeLongestPath(long source, long target) {
 
         visited.insert(combinedKey);
 
-        for (Transition edge: adjacencyList[currentNode]) {
+        for (Transition edge : adjacencyList[currentNode]) {
             if (!currentPath.empty() && edge.getSecondEntity() == currentPath.back().getFirstEntity()) {
                 continue;
             }
 
             // Check if the reverse of the current edge is already present in the path
             Transition reverseEdge = edge.reverseEntities();
-            if (find(currentPath.begin(), currentPath.end(), reverseEdge) != currentPath.end()) {
-                continue; // Skip traversing the same edge in the opposite direction
+            if (edgeSet.count(reverseEdge)) {
+                continue;  // Skip traversing the same edge in the opposite direction
             }
 
             int newWeight = min(currentWeight, edge.getAlertScore());
             vector<Transition> newPath = currentPath;
             newPath.push_back(edge);
             priorityQueue.emplace(newWeight, edge.getSecondEntity(), newPath);
+
+            // Add the current edge to the set
+            edgeSet.insert(edge);
         }
     }
 
     return {};
 }
+
 
 /**
  * Create a PathGraph object that can then be used to calculate the maximum score path between two given entities.

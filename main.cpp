@@ -53,7 +53,7 @@ double measureExecutionTime(Func&& func) {
 int main(int argc, char **argv) {
     double elapsedTime = measureExecutionTime([argc, argv] {
         if (argc != 3) {
-            cout << constants::message_instructions;
+            cout << constants::message_instructions << '\n';
         } else {
             string inputFilePath = string(argv[1]);
             string outputFilePath = string(argv[2]);

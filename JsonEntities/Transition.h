@@ -34,4 +34,17 @@ public:
 };
 
 
+namespace std {
+    template <>
+    struct hash<Transition> {
+        size_t operator()(const Transition &t) const {
+            return hash<long>{}(min(t.getFirstEntity(), t.getSecondEntity()))
+                   ^ hash<long>{}(max(t.getFirstEntity(), t.getSecondEntity()))
+                   ^ hash<string>{}(t.getAlertName())
+                   ^ hash<int>{}(t.getAlertScore());
+        }
+    };
+}
+
+
 #endif //BITXDR_TRANSITION_H
